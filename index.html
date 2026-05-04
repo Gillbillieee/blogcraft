@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlogCraft — AI Blog Post Writer | Free Blog Post Generator</title>
+  <meta name="description" content="Generate full blog posts in seconds with our free AI-powered writer. Multiple tones, SEO-optimized outlines. No signup required.">
+  <link rel="stylesheet" href="/src/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-8410225250422623" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo"><span class="logo-icon">📝</span> BlogCraft</a>
+      <div class="nav-links">
+        <a href="#writer" class="nav-link">Writer</a>
+        <a href="#templates" class="nav-link">Templates</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#writer" class="btn btn-sm btn-outline">Write Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Write Blog Posts That <span class="gradient-text">Rank & Engage</span></h1>
+      <p class="hero-subtitle">Generate SEO-optimized blog posts in seconds. AI-powered writing assistant for bloggers, marketers, and businesses.</p>
+    </div>
+  </section>
+
+  <section id="writer" class="writer-section">
+    <div class="container">
+      <div class="writer-layout">
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+          <div class="panel-header">
+            <h2>✍️ Write Your Post</h2>
+            <button class="btn btn-sm btn-outline" onclick="loadSample()">Load Sample</button>
+          </div>
+
+          <div class="form-group">
+            <label for="topic">Topic or Title</label>
+            <input type="text" id="topic" placeholder="e.g. 10 Proven Strategies to Grow Your Email List in 2026">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tone">Writing Tone</label>
+              <select id="tone">
+                <option value="professional">Professional</option>
+                <option value="casual">Casual & Friendly</option>
+                <option value="authoritative">Authoritative</option>
+                <option value="conversational">Conversational</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="length">Post Length</label>
+              <select id="length">
+                <option value="short">Short (500 words)</option>
+                <option value="medium" selected>Medium (1000 words)</option>
+                <option value="long">Long (1500+ words)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="keywords">Target Keywords (comma separated)</label>
+            <input type="text" id="keywords" placeholder="e.g. email marketing, grow list, lead generation">
+          </div>
+
+          <div class="form-group">
+            <label for="audience">Target Audience</label>
+            <input type="text" id="audience" placeholder="e.g. small business owners, marketers">
+          </div>
+
+          <div class="form-group">
+            <label for="includeSections">Include These Sections (one per line)</label>
+            <textarea id="includeSections" rows="4" placeholder="Introduction&#10;What is Email Marketing?&#10;Strategy 1: Lead Magnets&#10;Strategy 2: Social Media Campaigns&#10;Conclusion"></textarea>
+          </div>
+
+          <button class="btn btn-primary btn-lg" onclick="generatePost()">✨ Generate Blog Post</button>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="output-panel">
+          <div class="output-header">
+            <h3>Your Blog Post</h3>
+            <div class="output-actions">
+              <button class="btn btn-sm btn-outline" onclick="copyPost()">📋 Copy</button>
+              <button class="btn btn-sm btn-outline" onclick="downloadMD()">📥 Markdown</button>
+              <button class="btn btn-sm btn-primary" onclick="downloadHTML()">📥 HTML</button>
+            </div>
+          </div>
+
+          <div id="postOutput" class="post-output">
+            <div class="empty-state" id="postEmpty">
+              <div class="empty-icon">📝</div>
+              <p>Your AI-generated blog post will appear here.</p>
+              <p class="empty-hint">Enter a topic and hit generate!</p>
+            </div>
+          </div>
+
+          <div id="postLoading" class="loading-state" style="display:none;">
+            <div class="spinner"></div>
+            <p>Writing your blog post...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Templates Section -->
+  <section id="templates" class="templates-section">
+    <div class="container">
+      <h2>Blog Post Templates</h2>
+      <div class="templates-grid">
+        <div class="template-card active" onclick="selectTemplate('howto')">
+          <div class="template-preview howto-preview"></div>
+          <h3>How-To Guide</h3>
+          <p>Step-by-step tutorials with actionable advice</p>
+        </div>
+        <div class="template-card" onclick="selectTemplate('listicle')">
+          <div class="template-preview listicle-preview"></div>
+          <h3>Listicle</h3>
+          <p>Numbered lists with tips and insights</p>
+        </div>
+        <div class="template-card" onclick="selectTemplate('comparison')">
+          <div class="template-preview comparison-preview"></div>
+          <h3>Comparison</h3>
+          <p>A vs B product or strategy comparisons</p>
+        </div>
+        <div class="template-card" onclick="selectTemplate('opinion')">
+          <div class="template-preview opinion-preview"></div>
+          <h3>Opinion / Thought Leadership</h3>
+          <p>Bold takes on industry trends</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <h2>Simple Pricing</h2>
+      <p class="pricing-subtitle">Start free. Upgrade when you're ready.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-badge free">Free</div>
+          <h3>Starter</h3>
+          <div class="price">$0<span>/forever</span></div>
+          <ul class="feature-list">
+            <li>✅ 4 blog post templates</li>
+            <li>✅ Unlimited generations</li>
+            <li>✅ Markdown & HTML export</li>
+            <li>✅ SEO keyword suggestions</li>
+            <li>❌ AI writing assistant</li>
+            <li>❌ Content calendar</li>
+          </ul>
+          <button class="btn btn-outline btn-lg" onclick="document.getElementById('topic').focus()">Write Free</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge pro">PRO</div>
+          <h3>Pro</h3>
+          <div class="price">$9<span>/month</span></div>
+          <ul class="feature-list">
+            <li>✅ Everything in Free</li>
+            <li>✅ AI writing assistant</li>
+            <li>✅ Content calendar</li>
+            <li>✅ Plagiarism checker</li>
+            <li>✅ WordPress integration</li>
+            <li>✅ Priority support</li>
+          </ul>
+          <button class="btn btn-primary btn-lg">Upgrade to Pro</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><span class="logo-icon">📝</span> BlogCraft</div>
+      <p>Built for bloggers who want to publish consistently.</p>
+      <p class="footer-note">&copy; 2026 BlogCraft. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/src/js/app.js"></script>
+</body>
+</html>
